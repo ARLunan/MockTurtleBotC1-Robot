@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ubuntutbc/rosgz_ws/install/ros_ign_interfaces/include/**",
+        "/home/ubuntutbc/rosgz_ws/install/ros_gz_sim/include/**",
+        "/home/ubuntutbc/rosgz_ws/install/ros_gz_bridge/include/**",
+        "/home/ubuntutbc/rosgz_ws/install/ros_gz_interfaces/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/ubuntutbc/sambot_ws/src/sam_bot_description/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-arm64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
