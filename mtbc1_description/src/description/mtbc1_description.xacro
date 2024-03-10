@@ -17,7 +17,7 @@
 
   <xacro:property name="c1wheel_radius" value="0.0305"/>
   <xacro:property name="c1wheel_width" value="0.027"/>
-  <xacro:property name="c1wheel_ygap" value="0.0"/>
+  <xacro:property name="c1wheel_ygap" value="0.033"/>
   <xacro:property name="c1wheel_zoff" value="0.015"/>
   <xacro:property name="c1wheel_xoff" value="0.00"/>
 
@@ -68,7 +68,7 @@
       <parent link="base_link"/>
       <child link="${prefix}_link"/>
       <!-- <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(base_width/2+wheel_ygap)} ${-wheel_zoff}" rpy="0 0 0"/> -->
-      <origin xyz="${x_reflect*c1wheel_xoff} ${y_reflect*(c1base_rad+c1wheel_ygap)} ${-c1wheel_zoff}" rpy="0 0 0"/>
+      <origin xyz="${x_reflect*c1wheel_xoff} ${y_reflect*(c1base_rad-c1wheel_ygap)} ${-c1wheel_zoff}" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
     </joint>
   </xacro:macro>
