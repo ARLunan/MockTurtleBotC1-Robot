@@ -6,7 +6,7 @@ import os
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='mtbc1_description').find('mtbc1_description')
     #default_model_path = os.path.join(pkg_share, 'src/description/mtbc1_description.urdf')
-    default_model_path = os.path.join(pkg_share, 'src/description/mtbc1_description.xacro')
+    default_model_path = os.path.join(pkg_share, 'urdf/mtbc1_description.xacro')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf.config.rviz')
 
     robot_state_publisher_node = launch_ros.actions.Node(
