@@ -1,0 +1,1 @@
+/home/ubuntutbc/mtbc1_ws/src/MockTurtleBotC1/mtbc1_description/build/mtbc1_description/ament_cmake_core/mtbc1_descriptionConfig-version.cmake
