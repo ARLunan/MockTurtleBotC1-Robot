@@ -1,7 +1,7 @@
 # MockTurtleBot
 MockTurtleBot Project - iRobot© Create1 Base
 
-The requirement of the work in this repository is to document the development and post the release of  packages that migrate the original "Willow Garage" / Open Robotics Turtlebot (tm) where the last released repository was ROS Indigo, to ROS 2 Humble/Navigation 2 autonomous navigation, called "MockTurtleBot" using this orgiginal iRobot Create 1 Base. It should be mentioned that while this repository is written to support a Create 1 base, it should be mentioned that the installed base drive package (Autonomy Labs) includes support for the Roomba (e.g. Model 500 or 600) and Create2 base. To use enable these drivers, a manual revison must be made to the mtbc1_bringup launch file that is installed in the mtbc1_ws workspace, and recompiled.  
+The requirement of the work in this repository is to document the development and post the release of  packages that migrate the original "Willow Garage" / Open Robotics Turtlebot (tm) where the last released repository was ROS Indigo, to ROS 2 Humble/Navigation 2 autonomous navigation, called "MockTurtleBot" using this orgiginal iRobot Create 1 Base. It should be mentioned that while this repository is written to use with a iRobot Creat1, the installed base drive package (Autonomy Labs) includes support for the Roomba (e.g. Model 500 or 600) and Create2 base. To use enable these drivers, a manual revison must be made to the mtbc1_bringup launch file that is installed in the mtbc1_ws workspace, and recompiled.  
 
 **Installation of ROS 2 Packages and Dependancies on the Robot (SBC) and Desktop Computer.** This material references the ROS 2 and dependancies installation documented in the linorobot2 repository *https://github.com/linorobot/linorobot2/blob/humble/ROBOT* , and adds iinstructions specfically for this MockTurtleBotC1 robot model.
 
@@ -15,7 +15,7 @@ ros-humble-base (barebones) on a "aarch64", i.e Raspberry Pi or MAC M1.
 
 Note that if your Remote Desktop Machine is an "aarch64" such as a MAC M1, as it installs the -base, you must manually run an additional script "~/sudo apt install ros-humble-desktop to add the necessary packages to upgrade the install to a "Desktop" (e.g. rviz, teleop, joy, rqt)  
 
-While not essential the following Ubuntu packages can be helpful in running and trouble-shotting your Robot & Desktop computers. All install with "~/sudo apt install" openssh-server, avahi-daemon, htop, 
+While not essential the following Ubuntu packages can be helpful in running and trouble-shotting your Robot & Desktop computers. Install these ubuntu paclages with with "~/sudo apt install" openssh-server, avahi-daemon, htop, nload . 
 
 From the Ubuntu home directory, *~/git clone https://github.com/linorobot/ros2me* , then run **~/ ./install**
 
@@ -93,7 +93,33 @@ Source your ~/.bashrc to apply the changes you made:
 
 $ source ~/.bashrc
 
-**Install USB udev rules** for the Create 1 Base and RPLidar to assign persistant names for these two serial ports, name. create1 and rplidar.
+**Install USB udev rules**
+With Create 1 Base and RPLidar USB serail connection, it is essential that Linux Device manager interface to assign persistant names for these two serial ports, name. create1 and rplidar.
+
+**Create1**: The udev file *50-create.rule*s is included in the repository mtbc1_bringup/scripts folder 
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403" ATTRS{idProduct}=="6001", MODE:-"0666', SYMLINK+="create1"
+
+In linux terminal, navigate to the mtbc1_bringup/scripts folder and manually execute the following commands:
+$ sudo cp 50-create.rules /etc/udev/rules.d
+$ sudo service udev reload
+$ sudo service udev restart
+$ sudo udevadm control --reload && sudo udevadm trigger
+
+**RPLidar**: As this package is installed from Binary, the udev file is located in the system rules directories, /usr/lib/udev/rules.d and /usr/udev/rules.d
+
+To verify the correct functioning of the udev rules, rom a terminal running the following command should list the MockTurtlebotC1 USB serial ports with assigned names:x ports:
+
+ubuntu@rp4-ub22h-mt:~$ ls -l /dev/ |grep USB
+
+lrwxrwxrwx  1 root   root           7 Mar  5 14:02 create1 -> ttyUSB0
+
+lrwxrwxrwx  1 root   root           7 Mar  5 14:02 rplidar -> ttyUSB1
+
+crw-rw-rw-  1 root   dialout 188,   0 Mar  5 14:02 ttyUSB0
+
+crw-rw-rw-  1 root   dialout 188,   1 Mar  5 14:02 ttyUSB1  
+
 
 4. **Host Machine / Development Computer - RVIZ Configurations**
 
