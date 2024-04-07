@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <robot name="mtbc1" xmlns:xacro="http://ros.org/wiki/xacro">
 
-<!-- 
-<xacro:include filename="(find mtbc1_description)/urdf/mtbc1_base.urdf.xacro" />
-<xacro:include filename="(find mtbc1_description)/urdf/mtbc1_sensor.urdf.xacro" />
--->
-
   <!-- Define robot constants -->
   <xacro:property name="base_width" value="0.31"/>
   <xacro:property name="base_length" value="0.42"/>
@@ -104,3 +99,5 @@
   </joint> 
 
 <.robot>
+
+
