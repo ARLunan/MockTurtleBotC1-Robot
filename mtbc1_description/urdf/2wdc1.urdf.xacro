@@ -104,4 +104,4 @@
     <origin xyz="${c1caster_xoff} 0.0 ${-(c1base_len/2)}" rpy="0 0 0"/>
   </joint> 
 
-<.robot>
+</robot>
