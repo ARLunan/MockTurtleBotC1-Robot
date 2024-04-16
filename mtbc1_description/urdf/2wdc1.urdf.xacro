@@ -13,8 +13,8 @@
   <xacro:property name="base_length" value="0.42"/>
   <xacro:property name="base_height" value="0.18"/>
 
-  <xacro:property name="c1base_len" value="0.0612"/>
-  <xacro:property name="c1base_rad" value="0.165"/>
+  <xacro:property name="c1base_len" value="0.065"/>
+  <xacro:property name="c1base_rad" value="0.1915"/>
 
   <xacro:property name="wheel_radius" value="0.10"/>
   <xacro:property name="wheel_width" value="0.04"/>
@@ -30,6 +30,8 @@
 
   <!-- <xacro:property name="caster_xoff" value="0.14"/> -->
   <xacro:property name="c1caster_xoff" value="0.123"/>
+  <xacro:property name="c1fcaster_xoff" value="0.123"/>
+  <xacro:property name="c1rcaster_xoff" value="0.145"/>
   
   <!-- Robot Base -->
   <link name="base_link">
@@ -83,7 +85,7 @@
   <xacro:wheel prefix="drivewhl_l" x_reflect="-1" y_reflect="1" />
   <xacro:wheel prefix="drivewhl_r" x_reflect="-1" y_reflect="-1" />
   
-  <!-- Caster Wheel -->
+  <!-- Caster Front Wheel -->
   <link name="front_caster">
     <visual>
       <geometry>
@@ -102,7 +104,29 @@
     <parent link="base_link"/>
     <child link="front_caster"/>
     <!-- <origin xyz="${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0"/> -->
-    <origin xyz="${c1caster_xoff} 0.0 ${-(c1base_len/2)}" rpy="0 0 0"/>
+    <origin xyz="${c1fcaster_xoff} 0.0 ${-(c1base_len/2)}" rpy="0 0 0"/>
+  </joint> 
+
+  <!-- Caster Rear Wheel -->
+  <link name="Rear_caster">
+    <visual>
+      <geometry>
+        <!-- <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/> -->
+        <sphere radius="${(c1wheel_radius+c1wheel_zoff-(c1base_len/2))}"/>
+      </geometry>
+       <!-- <material name="Cyan"> -->
+       <!-- <color rgba="0 1.0 1.0 1.0"/> -->
+        <material name="Black">
+        <color rgba="0.0 0.0 0.0 0.0"/>
+      </material>
+    </visual>
+  </link>
+ 
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_caster"/>
+    <!-- <origin xyz="${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0"/> -->
+    <origin xyz="${c1rcaster_xoff} 0.0 ${-(c1base_len/2)}" rpy="0 0 0"/>
   </joint> 
 
 </robot>
