@@ -3,5 +3,5 @@
 <xacro:include filename="(find mtbc1_description)/urdf/sensor_shelf.urdf.xacro"/>
 <!-- <xacro:include filename="(find mtbc1_description)/urdf/generic_laser.urdf.xacro"/> -->
 <xacro:include filename="(find mtbc1_description)/urdf/camera_bracket.urdf.xacro"/>
-
+<xacro:include filename="(find mtbc1_description)/urdf/imu.urdf.xacro"/>
 </robot>
