@@ -29,9 +29,12 @@
   <xacro:property name="c1wheel_xoff" value="0.00"/>
 
   <!-- <xacro:property name="caster_xoff" value="0.14"/> -->
-  <xacro:property name="c1caster_xoff" value="0.123"/>
+  <!-- <xacro:property name="c1caster_xoff" value="0.123"/> -->
   <xacro:property name="c1fcaster_xoff" value="0.123"/>
   <xacro:property name="c1rcaster_xoff" value="0.145"/>
+
+  <!--IMU Properties-->
+  <xacro:property name="imu_zoff" value="0.266"/>
   
   <!-- Robot Base -->
   <link name="base_link">
@@ -100,7 +103,7 @@
     </visual>
   </link>
  
-  <joint name="caster_joint" type="fixed">
+  <joint name="casterf_joint" type="fixed">
     <parent link="base_link"/>
     <child link="front_caster"/>
     <!-- <origin xyz="${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0"/> -->
@@ -108,7 +111,7 @@
   </joint> 
 
   <!-- Caster Rear Wheel -->
-  <link name="Rear_caster">
+  <link name="rear_caster">
     <visual>
       <geometry>
         <!-- <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}"/> -->
@@ -116,17 +119,17 @@
       </geometry>
        <!-- <material name="Cyan"> -->
        <!-- <color rgba="0 1.0 1.0 1.0"/> -->
-        <material name="Black">
-        <color rgba="0.0 0.0 0.0 0.0"/>
+        <material name="White">
+        <color rgba="1.0 1.0 1.0 1.0"/>
       </material>
     </visual>
   </link>
  
-  <joint name="caster_joint" type="fixed">
+  <joint name="casterr_joint" type="fixed">
     <parent link="base_link"/>
     <child link="rear_caster"/>
     <!-- <origin xyz="${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0"/> -->
-    <origin xyz="${c1rcaster_xoff} 0.0 ${-(c1base_len/2)}" rpy="0 0 0"/>
+    <origin xyz="${-c1rcaster_xoff} 0.0 ${-(c1base_len/2)}" rpy="0 0 0"/>
   </joint> 
 
 </robot>
