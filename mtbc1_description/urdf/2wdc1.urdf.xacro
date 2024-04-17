@@ -6,7 +6,6 @@
 <xacro:include filename="(find mtbc1_description)/urdf/common_properties.urdf.xacro" />
 <xacro:include filename="(find mtbc1_description)/urdf/mtbc1_base.urdf.xacro" />
 <xacro:include filename="(find mtbc1_description)/urdf/mtbc1_sensors.urdf.xacro" />
-<xacro:include filename="(find mtbc1_description)/urdf/stacks/circlesc1.urdf.xacro />
 -->
 
   <!-- Define robot constants -->
