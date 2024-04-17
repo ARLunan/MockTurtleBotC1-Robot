@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Added to turtlebot create base and called by sensors_shelf.urdf.xacro -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 <xacro:property name="shelf_height" value="0.1225" />
 <xacro:property name="shelf_radius" value="0.1915" />
