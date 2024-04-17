@@ -4,7 +4,6 @@
   <!--<xacro:include filename="$(find irobot_create_description)/urdf/create3.urdf.xacro" /> -->
   
   <xacro:include filename="$(find turtlebot4_description)/urdf/common_properties.urdf.xacro" />
-  <xacro:include filename="$(find turtlebot4_description)/urdf/sensors/generic_laser.urdf.xacro" />
   <!--<xacro:include filename="$(find turtlebot4_description)/urdf/sensors/oakd.urdf.xacro" /> -->
   <xacro:include filename="$(find turtlebot4_description)/urdf/sensors/camera_bracket.urdf.xacro" />
 
@@ -21,4 +20,21 @@
   <xacro:property name="oakd_lite_y_offset"             value="${0*cm2m}"/>
   <xacro:property name="oakd_lite_z_offset"             value="${9.25385*cm2m}"/>
 
+  <!-- MtbC1 sensor definitions with gazebo parameters deleted-->
+
+  <xacro:rplidar name="rplidar" parent_link="base_link">
+    <origin xyz="${rplidar_x_offset} ${rplidar_y_offset} ${rplidar_z_offset + base_link_z_offset}"
+            rpy="0 0 ${pi/2}"/>
+  </xacro:rplidar>
+  
+  <xacro:camera_bracket name="oakd_camera_bracket" parent_link="base_link">
+    <origin xyz="${camera_mount_x_offset} ${camera_mount_y_offset} ${camera_mount_z_offset + base_link_z_offset}"/>
+  </xacro:camera_bracket>
+
+  <xacro:oakd model="lite" parent_link="oakd_camera_bracket">
+    <origin xyz="${oakd_lite_x_offset} ${oakd_lite_y_offset} ${oakd_lite_z_offset}"/>
+  </xacro:oakd>
+
+</robot>
+  
   </robot>

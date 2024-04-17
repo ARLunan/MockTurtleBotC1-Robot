@@ -1,4 +1,4 @@
-<!-- From Linorobot2, mounted above Camera Bracket -->
+<!-- From Linorobot2, mounted above Camera Bracket and called by mtbc1_sensors.urdf.xacro -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="imu">
     <link name="imu_link"/>

@@ -3,9 +3,9 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
 <xacro:include filename="(find mtbc1_description)/urdf/sensors_shelf.urdf.xacro"/>
-<xacro:include filename="(find mtbc1_description)/urdf/rplidar.urdf.xacro"/>
-<xacro:include filename="(find mtbc1_description)/urdf/camera_bracket.urdf.xacro"/>
-<xacro:include filename="(find mtbc1_description)/urdf/imu.urdf.xacro"/>
+<xacro:include filename="(find mtbc1_description)/urdf/sensors/rplidar.urdf.xacro"/>
+<xacro:include filename="(find mtbc1_description)/urdf/sensors/camera_bracket.urdf.xacro"/>
+<xacro:include filename="(find mtbc1_description)/urdf/sensors/imu.urdf.xacro"/>
 
 <!-- Mechanical properties -->
   <xacro:property name="rplidar_x_offset"              value="${0.393584*cm2m}"/>
@@ -20,7 +20,7 @@
   <xacro:property name="oakd_lite_y_offset"             value="${0*cm2m}"/>
   <xacro:property name="oakd_lite_z_offset"             value="${9.25385*cm2m}"/>
 
-  <!-- Turtlebot4 sensor definitions with gazebo parameters deleted-->
+  <!-- MtbC1 sensor definitions with gazebo parameters deleted-->
 
   <xacro:rplidar name="rplidar" parent_link="base_link">
     <origin xyz="${rplidar_x_offset} ${rplidar_y_offset} ${rplidar_z_offset + base_link_z_offset}"
