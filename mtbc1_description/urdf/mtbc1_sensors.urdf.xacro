@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- mtbc1 Sensor Models based on Turtlebot4 -->
-  <!--<xacro:include filename="$(find mtbc1_description)/urdf/sensors/oakd.urdf.xacro" /> -->
+  <!--<xacro:include filename="$(find mtbc1_description)/urdf/sensors/oakd.urdf.xacro" />
   <xacro:include filename="$(find mtbc1_description)/urdf/sensors/camera_bracket.urdf.xacro" />
   <xacro:include filename="$(find mtbc1_description)/urdf/sensors/imu.urdf.xacro" />
-  <xacro:include filename="$(find mtbc1_description)/urdf/sensors/rplidar.urdf.xacro" />
+  xacro:include filename="$(find mtbc1_description)/urdf/sensors/rplidar.urdf.xacro" /> -->
   <xacro:include filename="$(find mtbc1_description)/urdf/sensors/sensors_shelf.urdf.xacro" />
 
   <!-- Mechanical properties -->
@@ -36,5 +36,3 @@
   </xacro:oakd>
 
 </robot>
-  
-  </robot>

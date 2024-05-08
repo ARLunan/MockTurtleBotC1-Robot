@@ -40,7 +40,7 @@
   </link>
   
    <!-- Robot Footprint -->
-   <link name="base_footprint"/>
+  <link name="base_footprint"/>
 
   <joint name="base_joint" type="fixed">
     <parent link="base_link"/>

@@ -2,12 +2,14 @@
 <!-- Called by mtbc1_description.launch.py -->
 <robot name="mtbc1" xmlns:xacro="http://ros.org/wiki/xacro">
 
-<!-- <xacro:include filename="$(find mtbc1_description)/urdf/common_properties.urdf.xacro" /> -->
+  <xacro:include filename="$(find mtbc1_description)/urdf/common_properties.urdf.xacro" />
   <xacro:include filename="$(find mtbc1_description)/urdf/create_base.urdf.xacro" />
-
-<!--
-  <xacro:include filename="(find mtbc1_description)/urdf/mtbc1_sensors.urdf.xacro" />
-  xacro:include filename="(find mtbc1_description)/urdf/meshes/circlesc1.urdf.xacro" />
+  <!-- Test sensors_shelf.urdf.xacro -->
+  <xacro:include filename="$(find mtbc1_description)/urdf/sensors/sensors_shelf.urdf.xacro" />
+  
+  <!--<xacro:include filename="$(find mtbc1_description)/urdf/mtbc1_sensors.urdf.xacro" /> -->
+  <!--
+  <xacro:include filename="$(find mtbc1_description)/urdf/meshes/circlesc1.urdf.xacro" />
 -->
 
   <xacro:create_base wheel_separation="0.26" base_diameter="0.3302">
