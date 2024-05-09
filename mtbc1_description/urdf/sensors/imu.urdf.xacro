@@ -1,5 +1,7 @@
 <!-- From Linorobot2, mounted above Camera Bracket and called by mtbc1_sensors.urdf.xacro -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="imu_zoff" value="0.141" />
+
   <xacro:macro name="imu">
     <link name="imu_link"/>
     
