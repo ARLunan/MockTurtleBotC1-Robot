@@ -20,6 +20,67 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
+    sensors_launch_path = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_bringup'), 'launch', 'sensors.launch.py']
+    )
+
+    joy_launch_path = PathJoinSubstitution(
+        [FindPackageShare('mtbc1_bringup'), 'launch', 'joy_teleop.launch.py']
+    )
+
+    description_launch_path = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
+    )
+
+    ekf_config_path = PathJoinSubstitution(
+        [FindPackageShare("linorobot2_base"), "config", "ekf.yaml"]
+    )
+
+    default_robot_launch_path = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_bringup'), 'launch', 'default_robot.launch.py']
+    )
+
     return LaunchDescription([
 
+    DeclareLaunchArgument(
+        name='base_serial_port', 
+        default_value='/create1',
+        description='Mtbc1 Base Serial Port',
+    ),
+
+    DeclareLaunchArgument(
+        name='odom_topic', 
+        default_value='/odom',
+        description='EKF out odometry topic'
+    ),
+    
+    DeclareLaunchArgument(
+        name='joy', 
+        default_value='false',
+        description='Use Joystick'
+    ),            
+
+    DeclareLaunchArgument(
+        name='joy', 
+        default_value='false',
+        description='Use Joystick'
+    ),
+
+    Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        output='screen',
+        parameters=[
+            ekf_config_path
+        ],
+        remappings=[("odometry/filtered", LaunchConfiguration("odom_topic"))]
+    ),
+
+    IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(default_robot_launch_path),
+        launch_arguments={
+            'base_serial_port': LaunchConfiguration("base_serial_port")
+        }.items()
+     )   
 ])
