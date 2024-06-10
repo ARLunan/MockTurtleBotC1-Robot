@@ -6,15 +6,48 @@
   <xacro:include filename="$(find mtbc1_description)/urdf/create_base.urdf.xacro" />
   
   <!-- Test sensors_shelf.urdf.xacro -->
-  <xacro:include filename="$(find mtbc1_description)/urdf/sensors/sensors_shelf.urdf.xacro" />
-    <!--<xacro:include filename="$(find mtbc1_description)/urdf/mtbc1_sensors.urdf.xacro" /> -->
-  <xacro:include filename="$(find mtbc1_description)/urdf/stacks/circlesc1.urdf.xacro" />
+  <!--<xacro:include filename="$(find mtbc1_description)/urdf/sensors/sensors_shelf.urdf.xacro" /> -->
+  <xacro:include filename="$(find mtbc1_description)/urdf/mtbc1_sensors.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find mtbc1_description)/urdf/stacks/circlesc1.urdf.xacro" -->
 
   <xacro:create_base wheel_separation="0.26" base_diameter="0.3302">
     <mesh filename="package://mtbc1_description/meshes/create_1.dae" />
   </xacro:create_base>
 
+  <!-- Sensor laser (rplidar), depth (oakd) , camera_mount pose block name -->
+  <!-- xacro:name must be instantiated in the sensor device urdf.xacro -->
+
+  <!-- <xacro:imu/> -->
+  
+  <!-- For linorobot2 sensor macros instanciated in mtbc1_sensors.urdf.xacro -->
+  <!--  
+  <xacro:generic_laser>
+    <xacro:insert_block name="laser_pose"/>
+  </xacro:generic_laser>
+
+  <xacro:depth_sensor>
+    <xacro:insert_block name="depth_sensor_pose"/>
+  </xacro:depth_sensor>
+
+  <xacro:camera_mount>
+    <xacro:insert_block name="camera_bracket_pose"/>
+  </xacro:camera_mount>
+  
+  <xacro:rplidar>
+    <xacro:insert_block name="rplidar_pose"/>
+  </xacro:rplidar>
+
+   <xacro:oakd>
+    <xacro:insert_block name="oakd_pose"/>
+  </xacro:oakd>
+ 
+  <xacro:camera_mount>
+    <xacro:insert_block name="camera_bracket_pose"/>
+  </xacro:camera_mount>
+  -->
+  
+  <!-- Do not use TB circles xacros YET
   <create/>
-  <stack_circles parent="base_link/>"/>
+  <stack_circles parent="base_link"/> -->
 
 </robot>
