@@ -30,23 +30,6 @@
   <xacro:property name="oakd_lite_y_offset"             value="${0*cm2m}"/>
   <xacro:property name="oakd_lite_z_offset"             value="${9.25385*cm2m}"/>
 
-  <!-- Sensor pose for laser (rplidar), depth_camera (oakd_lite), and camera_mount -->
-  <!-- From linorobot2_description 2wd_properties.urdf.xacro -->
-
- <!--  For linorobot2 sensor xacros , MUST match mtbc1.urdf.xacro xacro:name
-  <xacro:property name="laser_pose">
-    <origin xyz="0.12 0 0.33" rpy="0 0 0"/>
-  </xacro:property>
-
-  <xacro:property name="depth_sensor_pose">
-    <origin xyz="0.14 0.0 0.045" rpy="0 0 0"/>
-  </xacro:property>
-
-  <xacro:property name="camera_bracket_pose">
-    <origin xyz="0.14 0.0 0.045" rpy="0 0 0"/>
-  </xacro:property>
-  -->
-    
   <!-- For Turtlebot4 sensor xacros , MUST match xacro mtbc1.urdf.xacro xacro:name-->
   <xacro:rplidar name="rplidar" parent_link="base_link">
     <origin xyz="${rplidar_x_offset} ${rplidar_y_offset} ${rplidar_z_offset + shelf_zoff}"
