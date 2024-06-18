@@ -1,3 +1,13 @@
+# This launch mtbc1_description.launch.py file was used as a toolchain to develop the Robot xacro 
+# Revised by AR Lunan derived from navigation2_tutorials/sambot_description (that has a with jsp gui)
+# for use in MockTurtleBot Robot. Environment value not necessary
+# Descrpton Package name is mtbc1_description 
+# It uses model=mtbc1.urdf.xacro which combines xacros from turtlebot, turtlebot4, autonomylabs create_1
+# launches rviz=urdf.config.rviz 
+# Note that this launch file/rviz combination does not properly display the create_1 base visual with jsp gui disabled (gui:=false)
+# The deployed MockTurtleBotC1 Robot uses the launch file linorobot2/description.launch.py file (that has no jsp gui)
+# with this model=mtbc1.urdf.xacro, rviz=urdf_config.rviz from linorobot2 that properly displays the create_1 base image.
+
 import launch
 from launch.substitutions import Command, LaunchConfiguration
 import launch_ros

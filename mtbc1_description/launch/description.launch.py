@@ -1,4 +1,4 @@
-# Reivised by AR Lunan for use with MockTurtleBot. Environment value not necessary
+# Revised by AR Lunan based on linorobot2 (no jsp gui) for use with MockTurtleBot. Environment value not necessary
 # Descrpton Package name is mtbc1_description 
 #
 # Copyright (c) 2021 Juan Miguel Jimeno
