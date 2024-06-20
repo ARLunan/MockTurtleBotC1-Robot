@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- mtbc1 Sensor Models based on Turtlebot4 -->
-  <!-- 
-  <xacro:include filename="$(find mtbc1_description)/urdf/sensors/imu.urdf.xacro" />  -->
+   
+  <xacro:include filename="$(find mtbc1_description)/urdf/sensors/imu.urdf.xacro" />
   <xacro:include filename="$(find mtbc1_description)/urdf/sensors/oakd.urdf.xacro" />
   <xacro:include filename="$(find mtbc1_description)/urdf/sensors/camera_bracket.urdf.xacro" />
   <xacro:include filename="$(find mtbc1_description)/urdf/sensors/rplidar.urdf.xacro" />
@@ -30,6 +30,11 @@
   <xacro:property name="oakd_lite_y_offset"             value="${0*cm2m}"/>
   <xacro:property name="oakd_lite_z_offset"             value="${9.25385*cm2m}"/>
 
+  <xacro:property name="imu_z_offset" value="${14.1*cm2m}" />
+  <xacro:property name="imu_length" value="${2.55*cm2m}" />
+  <xacro:property name="imu_width" value="${1.55*cm2m}" />
+  <xacro:property name="imu_height" value="${0.16*cm2m}" />
+
   <!-- For Turtlebot4 sensor xacros , MUST match xacro mtbc1.urdf.xacro xacro:name-->
   <xacro:rplidar name="rplidar" parent_link="base_link">
     <origin xyz="${rplidar_x_offset} ${rplidar_y_offset} ${rplidar_z_offset + shelf_zoff}"
@@ -43,5 +48,7 @@
   <xacro:oakd name="oakd" model="lite" parent_link="oakd_camera_bracket">
     <origin xyz="${oakd_lite_x_offset} ${oakd_lite_y_offset} ${oakd_lite_z_offset}"/>
   </xacro:oakd>
+
+  <xacro:imu/>
 
 </robot>

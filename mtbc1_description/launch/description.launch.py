@@ -1,6 +1,6 @@
 # Revised by AR Lunan based on linorobot2 (no jsp gui) as the final MockTurtleBot-Robot repo. Environment value not necessary
-# Descrpton Package name is mtbc1_description . This launch file launches mtbc1.urdf.xacro and rviz urdf_config.rviz
-#  that properly displays the create_1 base robot model image.  
+# Descrpton Package name is mtbc1_description . This launch file launches mtbc1.urdf.xacro and
+# rviz urdf_config.rviz that properly displays the create_1 base robot model image.  
 #
 # Copyright (c) 2021 Juan Miguel Jimeno
 #
