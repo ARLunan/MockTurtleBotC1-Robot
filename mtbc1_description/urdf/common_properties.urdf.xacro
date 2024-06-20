@@ -92,6 +92,11 @@
       <color rgba="1 0 0 1"/>
     </material>
   </xacro:property> 
+  <xacro:property name="material_dark_blue">
+    <material name="dark_blue">
+      <color rgba="0 0 255 1"/>
+    </material>
+  </xacro:property> 
 
   <!-- Material macros -->
   <xacro:macro name="material_black">
