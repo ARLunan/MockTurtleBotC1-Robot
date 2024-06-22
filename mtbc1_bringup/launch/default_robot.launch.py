@@ -35,7 +35,8 @@ def generate_launch_description():
             name='base_serial_port', 
             default_value='create1',
             description='mtbc1 Base Serial Port'
-        ),
+        )
+     
     # Create_1 base launch code
         '''Node(
             package='create_driver',
@@ -45,12 +46,12 @@ def generate_launch_description():
             parameters=["${var config}", "${robot model}" value="CREATE_1"],
         arguments=['dev', LaunchConfiguration("base_serial_port")]
        ),
-       
+       '''
        IncludeLaunchDescription(
             PythonLaunchDescriptionSource(description_launch_path)
        ),
        IncludeLaunchDescription(
             PythonLaunchDescriptionSource(sensors_launch_path),
        )
-       ''' 
+       
     ])
