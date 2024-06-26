@@ -19,7 +19,7 @@ from launch_ros.substitutions import FindPackageShare
 from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
-
+    '''
     sensors_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'), 'launch', 'sensors.launch.py']
     )
@@ -27,7 +27,7 @@ def generate_launch_description():
     joy_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'), 'launch', 'joy_teleop.launch.py']
     )
-
+    '''
     description_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_description'), 'launch', 'description.launch.py']
     )
@@ -41,15 +41,16 @@ def generate_launch_description():
         [FindPackageShare('mtbc1_bringup'), 'launch', 'default_robot.launch.py']
     ) 
     '''
+    '''
     default_robot_launch_path = PathJoinSubstitution(
         [FindPackageShare('create_bringup'), 'launch', 'create_1.launch.py']
     )
-
+     '''
     return LaunchDescription([
 
     DeclareLaunchArgument(
-        name='base_serial_port', 
-        default_value='/create1',
+        name='dev', 
+        default_value='/dev/create1',
         description='Mtbc1 Base Serial Port',
     ),
 
@@ -81,11 +82,12 @@ def generate_launch_description():
         ],
         remappings=[("odometry/filtered", LaunchConfiguration("odom_topic"))]
     ),
-
+    '''
     IncludeLaunchDescription(
         PythonLaunchDescriptionSource(default_robot_launch_path),
         launch_arguments={
             'base_serial_port': LaunchConfiguration("base_serial_port")
         }.items()
-     )   
+     )  
+     ''' 
 ])
