@@ -82,21 +82,12 @@ def generate_launch_description():
         ],
         remappings=[("odometry/filtered", LaunchConfiguration("odom_topic"))]
     ),
-<<<<<<< HEAD
-    
-=======
     '''
->>>>>>> 59be9e54c1a448e013028b98c865f537bf452913
     IncludeLaunchDescription(
         PythonLaunchDescriptionSource(default_robot_launch_path),
         launch_arguments={
             'base_serial_port': LaunchConfiguration("base_serial_port")
         }.items()
-<<<<<<< HEAD
-    )
-    
-=======
      )  
      ''' 
->>>>>>> 59be9e54c1a448e013028b98c865f537bf452913
 ])
