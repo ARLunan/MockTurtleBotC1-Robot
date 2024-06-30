@@ -66,9 +66,9 @@ def generate_launch_description():
     ),            
 
     DeclareLaunchArgument(
-        name='joy', 
-        default_value='false',
-        description='Use Joystick'
+        name='imn', 
+        default_value='true',
+        description='Enable IMU'
     ),
 
     Node(
@@ -81,11 +81,12 @@ def generate_launch_description():
         ],
         remappings=[("odometry/filtered", LaunchConfiguration("odom_topic"))]
     ),
-
+    
     IncludeLaunchDescription(
         PythonLaunchDescriptionSource(default_robot_launch_path),
         launch_arguments={
             'base_serial_port': LaunchConfiguration("base_serial_port")
         }.items()
-     )   
+    )
+    
 ])
