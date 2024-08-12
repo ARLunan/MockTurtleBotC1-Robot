@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Juan Miguel Jimeno and revsied by AR Lunan
+# Copyright (c) 2021 Juan Miguel Jimeno
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ def launch_rplidar(context, *args, **kwargs):
                 [FindPackageShare('sllidar_ros2'), 'launch', launch_file]
             )),
             launch_arguments={
-                'serial_port': 'rplidar', 
+                'serial_port': '/dev/rplidar', 
                 'frame_id': LaunchConfiguration('frame_id'),
             }.items()   
         )]
@@ -257,3 +257,4 @@ def generate_launch_description():
         ),
         OpaqueFunction(function=launch_rplidar)
     ])
+

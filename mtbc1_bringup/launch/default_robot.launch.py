@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Juan Miguel Jimeno and as revised by AR Lunan 2024
+# Copyright (c) 2021 Juan Miguel Jimeno
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,28 +23,56 @@ from launch.conditions import IfCondition, LaunchConfigurationEquals, LaunchConf
 
 def generate_launch_description():
     sensors_launch_path = PathJoinSubstitution(
-        [FindPackageShare('mtbc1_bringup'), 'launch', 'sensors.launch.py']
+        [FindPackageShare('linorobot2_bringup'), 'launch', 'sensors.launch.py']
     )
 
     description_launch_path = PathJoinSubstitution(
-        [FindPackageShare('mtbc1_description'), 'launch', 'description.launch.py']
+        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
     )
 
     return LaunchDescription([
         DeclareLaunchArgument(
             name='base_serial_port', 
-            default_value='create1',
-            description='mtbc1 Base Serial Port'
+            default_value='/dev/ttyACM0',
+            description='Linorobot Base Serial Port'
         ),
-        
-        '''Fix This'''
+
+        DeclareLaunchArgument(
+            name='micro_ros_baudrate', 
+            default_value='115200',
+            description='micro-ROS baudrate'
+        ),
+
+        DeclareLaunchArgument(
+            name='micro_ros_transport',
+            default_value='serial',
+            description='micro-ROS transport'
+        ),
+
+        DeclareLaunchArgument(
+            name='micro_ros_port',
+            default_value='8888',
+            description='micro-ROS udp/tcp port number'
+        ),
+
         Node(
-            package='create_driver',
-            executable='create_1.launch.py',
-            name='Create 1 Base Driver',
+            condition=LaunchConfigurationEquals('micro_ros_transport', 'serial'),
+            package='micro_ros_agent',
+            executable='micro_ros_agent',
+            name='micro_ros_agent',
             output='screen',
-            arguments=[('/dev', LaunchConfiguration('base_serial_port')), 'desc','False']
+            arguments=['serial', '--dev', LaunchConfiguration("base_serial_port"), '--baudrate', LaunchConfiguration("micro_ros_baudrate")]
         ),
+
+        Node(
+            condition=LaunchConfigurationEquals('micro_ros_transport', 'udp4'),
+            package='micro_ros_agent',
+            executable='micro_ros_agent',
+            name='micro_ros_agent',
+            output='screen',
+            arguments=[LaunchConfiguration('micro_ros_transport'), '--port', LaunchConfiguration('micro_ros_port')]
+        ),
+    
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(description_launch_path)
         ),
