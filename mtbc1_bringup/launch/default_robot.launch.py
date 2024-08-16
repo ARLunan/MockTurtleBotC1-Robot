@@ -24,16 +24,22 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
-    default_robot_launch_path = PathJoinSubstitution(
-        [FindPackageShare('mtbc1_bringup'), 'launch', 'default_robot.launch.py']
-    )
-
     return LaunchDescription([
 
         DeclareLaunchArgument(
-            name='joy', 
+            name='desc', 
             default_value='false',
-            description='Use Joystick'
-        )  
+            description='Mtbc1 Base Enable robot description'
+        ),
+
+        Node(
+            package='create_bringup',
+            executable='create_1.launch.py',
+            name='create_bringup',
+            output='screen',
+            arguments=[LaunchConfiguration("desc")]
+        ),
+
+
 
 ])
