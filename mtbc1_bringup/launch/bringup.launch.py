@@ -24,6 +24,10 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
+    joy_launch_path = PathJoinSubstitution(
+        [FindPackageShare('mtbc1_bringup'), 'launch', 'joy_teleop.launch.py']
+    )
+    
     default_robot_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'), 'launch', 'default_robot.launch.py']
     )

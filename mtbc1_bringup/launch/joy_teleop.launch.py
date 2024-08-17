@@ -23,7 +23,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     joy_config_path = PathJoinSubstitution(
-        [FindPackageShare("linorobot2_bringup"), "config", "joy.yaml"]
+        [FindPackageShare("mtbc1_bringup"), "config", "f710.yaml"]
     )
 
     return LaunchDescription([
