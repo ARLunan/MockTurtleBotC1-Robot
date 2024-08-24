@@ -31,13 +31,22 @@ def generate_launch_description():
     default_robot_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'), 'launch', 'default_robot.launch.py']
     )
-
+    
     return LaunchDescription([
 
-        DeclareLaunchArgument(
-            name='joy', 
-            default_value='false',
-            description='Use Joystick'
-        )  
+    DeclareLaunchArgument(
+      name='joy', 
+      default_value='false',
+      description='Use Joystick'
+    ),  
+
+    IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(joy_launch_path)                         
+    ),
+
+    IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(default_robot_launch_path)                         
+    )
+
 
 ])

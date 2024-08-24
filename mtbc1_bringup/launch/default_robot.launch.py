@@ -24,6 +24,14 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
+    sensors_launch_path=PathJoinSubstitution(
+        [FindPackageShare('mtbc1_bringup'),'launch','sensors.launch.py']
+    )
+
+    descrption_launch_path=PathJoinSubstitution(
+        [FindPackageShare('mtbc1_bringup'),'launch','description.launch.py']
+    )
+
     return LaunchDescription([
 
         DeclareLaunchArgument(
