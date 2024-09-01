@@ -1,11 +1,11 @@
-## Manual installation of MockTurtleBotC1-Robot packages on Robot computer
-### Refer to separate Manual Installation of MockTurtleBotC1-Desktop on Desktop computer 
+# Manual installation of MockTurtleBotC1-Robot packages on Robot computer
+Refer to separate Manual Installation of MockTurtleBotC1-Desktop on Desktop computer 
 
-### Note: This Procedure installs all base, bringup, description and navigation packages   on the Robot Computer (RaspBerry Pi) that does not necessarily require a connected monitor, though any robot, SLAM & Nav Visualization functions should be done on the Desktop Computer.      
+Note: This Procedure installs all base, bringup, description and navigation packages   on the Robot Sinble Board (SBC) Computer (RaspBerry Pi) that does not necessarily require a connected monitor, though any robot, SLAM & Nav Visualization functions should be done on the Remote Desktop Computer.      
 
-### 1. Install specfic functional Packages from ROS 2 and MockTurtleBotC1-ROBOT Github Repository into the workspace. e.g. mtbc1_ws
+1. Install specfic functional Packages from ROS 2 and MockTurtleBotC1-ROBOT Github Repository into the workspace. e.g. mtbc1_ws
 
-#### 1.1 Install and Source your ROS2 distro and workspace
+1.1 Install and Source your ROS2 distro and workspace
 If it's your first time using ROS 2 and haven't created your ROS2 workspace yet, you can check out 
 [ROS2 Creating a Workspace](https://docs.ros.org/en/galactic/Tutorials/Workspace/Creating-A-Workspace.html) tutorial. 
 The MockTurtleBotC1 code supports ros-distro  = **humble** currently.
@@ -16,6 +16,8 @@ The MockTurtleBotC1 code supports ros-distro  = **humble** currently.
     
     source /opt/ros/humble/setup.bash
     
+A reminder that , as described in this repository's README.me, configure the **.gitignore** file if using Git and VSCode applications to develop code.  
+    
 #### 1.2 Install LIDAR ROS2 drivers:
 
 RPLIDAR:
@@ -23,7 +25,7 @@ RPLIDAR:
     sudo apt install -y ros-$ROS_DISTRO-rplidar-ros
     Note that this install configures USB udev rules  into /usr/udev/rules.d directory  
    
-#### 1.3 Install depth sensor drivers and rgd color camera:
+#### 1.3 Install Camera depth sensor rgb and stereo depth drivers :
 
 OAK-D Lite Camera:
 
@@ -77,24 +79,24 @@ crw-rw-rw-  1 root   dialout 188,   1 Mar  5 14:02 ttyUSB1
 
 #### 1.6 Configure ENV Variables
 ### 1. Robot Type
-Set LINOROBOT2_BASE env variable to the type of robot base that you want to use. This is not required if you're using a custom URDF. The MockTurtleBotC1 is a *2wd*. For example:
+Set MTBC1_BASE env variable to the type of robot base that you want to use. This is not required if you're using a custom URDF. The MockTurtleBotC1 is a *2wd*. For example:
 
-    echo "export LINOROBOT2_BASE=2wd" >> ~/.bashrc
+    echo "export MTBC1_BASE=2wd" >> ~/.bashrc
 
-Tested sensors are:
-*oakdlite* - For example: https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1?variant=42583102456031
+Tested sensor is:
+*oakdlite* - For example: [https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1?variant=42583102456031](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1?variant=42583102456031)
 
-    echo "export LINOROBOT2_DEPTH_SENSOR=oakdlite" >> ~/.bashrc
+    echo "export MTBC1_DEPTH_SENSOR=oakdlite" >> ~/.bashrc
 
 #### 2.2 Laser Sensor
-The launch files of the tested laser sensors have already been added in bringup.launch.py. You can enable one of these sensors by exporting the laser sensor you're using to `LINOROBOT2_LASER_SENSOR` env variable.
+The launch files of the tested laser sensors have already been added in bringup.launch.py. You can enable one of these sensors by exporting the laser sensor you're using to `MTBC1_LASER_SENSOR` env variable.
 
 Tested Laser Sensors:
 *rplidar* - [RP LIDAR A1](https://www.slamtec.com/en/Lidar/A1)
 
-    echo "export LINOROBOT2_LASER_SENSOR=rplidar" >> ~/.bashrc
+    echo "export MTBC1_LASER_SENSOR=rplidar" >> ~/.bashrc
     
-   If you export a depth sensor to `LINOROBOT2_LASER_SENSOR`, the launch file will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser.
+   If you export a depth sensor to `MTBC1_LASER_SENSOR`, the launch file will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser.
 
 ### 3. Save changes
 Source your `~/.bashrc` to apply the changes you made:
@@ -116,8 +118,8 @@ and paste the following:
 
     #!/bin/sh
 
-    export LINOROBOT2_BASE=<your_robot_type>
-    export LINOROBOT2_LASER_SENSOR=<your_supported_sensor> #(optional)
+    export MTBC1=<your_robot_type>
+    export MTBC1_LASER_SENSOR=<your_supported_sensor> #(optional)
 
 ### 2.2 Create systemd service
 
@@ -160,4 +162,4 @@ You can check if the service you just created is correct by:
     sudo rm /etc/systemd/system/robot-boot.service
 
 
-Source: https://blog.roverrobotics.com/how-to-run-ros-on-startup-bootup/
+Source: [https://blog.roverrobotics.com/how-to-run-ros-on-startup-bootup]/
