@@ -1,7 +1,7 @@
-# Manual installation of MockTurtleBotC1-Robot packages on Robot computer
+# Manual installation of MockTurtleBotC1-Robot packages on Robot Computer
 Refer to separate Manual Installation of MockTurtleBotC1-Desktop on Desktop computer 
 
-Note: This Procedure installs all base, bringup, description and navigation packages   on the Robot Sinble Board (SBC) Computer (RaspBerry Pi) that does not necessarily require a connected monitor, though any robot, SLAM & Nav Visualization functions should be done on the Remote Desktop Computer.      
+Note: This Procedure installs all base, bringup, description and navigation packages on the Robot Single Board (SBC) Computer (RaspBerry Pi) that does not necessarily require a connected monitor, though any robot, SLAM & Nav Visualization functions should be done on the Remote Desktop Computer. These procedures can be done directly on the Robot Computer running Ubuntu 22.04 Desktop with a connecte dMonitor, Keyboard & Mouse, or froma Ubuntu Desktop with a SSH remote connnection.     
 
 1. Install specfic functional Packages from ROS 2 and MockTurtleBotC1-ROBOT Github Repository into the workspace. e.g. mtbc1_ws
 
@@ -25,21 +25,17 @@ RPLIDAR:
     sudo apt install -y ros-$ROS_DISTRO-rplidar-ros
     Note that this install configures USB udev rules  into /usr/udev/rules.d directory  
    
-#### 1.3 Install Camera depth sensor rgb and stereo depth drivers :
+#### 1.3 Install Sensors, Camera RGB image, Stereo depth drivers, and IMU :
 
-OAK-D Lite Camera:
+An **Luxonis OAK-D-Lite Camera** includes a RBG Color Camera,  stereo pair Camra to generate a Depth Image, and IMU (generating Acceleration motion and GyroScope position data). The drivers are installed from a Binary package on the ROS Repository with the following script run from a Terminal : (where $ROS_DISTRO is humble, previously installed on the Robot. 
 
     sudo apt install ros-$ROS_DISTRO-depthai-ros
     
 #### 1.4 Install Create Base Library and driver:
-
-    mkdir -p /mtbc1_ws
-    cd create_ws
-    git clone -b $ROS_DISTRO https://github.com/ARLunan/autonomy_labs_create_robot.git
-    sudo apt update && rosdep update
-    rosdep install --from-path src --ignore-src -y
-    colcon build
-    source install/setup.bash
+This Turtlebot Create Robot uses an iRobot Roomba 500 or Create 1 Base has battery, Differerential Driv e(2WD) motors controlled from a serial protocol and  generates Odometry data. The drivers are installed from a Binary package on the ROS Repository with the following script run from a Terminal : 
+   
+       sudo apt install ros-$ROS_DISTRO-create_robot
+       source opt/ros/humble/setup.bash
    
 #### 1.5 Configure Serial USB Permissions and Install USB Serial Port udev Rules
 
@@ -56,7 +52,7 @@ With Create 1 Base and RPLidar USB serail connection, it is essential that Linux
 
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0403" ATTRS{idProduct}=="6001", MODE:-"0666', SYMLINK+="create1"
 
-In linux terminal, navigate to the mtbc1_bringup/scripts folder and manually execute the following commands:
+In Linux terminal, navigate to the mtbc1_bringup/scripts folder and manually execute the following commands:
 $ sudo cp 50-create.rules /etc/udev/rules.d
 $ sudo service udev reload
 $ sudo service udev restart
@@ -83,7 +79,7 @@ Set MTBC1_BASE env variable to the type of robot base that you want to use. This
 
     echo "export MTBC1_BASE=2wd" >> ~/.bashrc
 
-Tested sensor is:
+Tested Image and IMU sensor is:
 *oakdlite* - For example: [https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1?variant=42583102456031](https://shop.luxonis.com/collections/oak-cameras-1/products/oak-d-lite-1?variant=42583102456031)
 
     echo "export MTBC1_DEPTH_SENSOR=oakdlite" >> ~/.bashrc
