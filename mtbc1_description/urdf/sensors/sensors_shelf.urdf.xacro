@@ -3,9 +3,9 @@
   <!-- Based on shell_link & joint declaration in /standard/turtlebot4_urdf.xacro -->
 <robot name="Sensors" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:property name="shelf_zoff" value="0.15085" />
-  <xacro:property name="shelf_radius" value="0.075" />
-  <xacro:property name="shelf_length" value="0.0015" />
+  <xacro:property name="shelf_zoff" value="${15.085*cm2m}" />
+  <xacro:property name="shelf_radius" value="${7.5*cm2m}" />
+  <xacro:property name="shelf_length" value="${.15*cm2m}" />
 
     <!-- Sensor Shelf Definition -->
   <link name="sensors_shelf_link">
