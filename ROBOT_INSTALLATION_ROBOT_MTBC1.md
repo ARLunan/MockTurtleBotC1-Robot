@@ -18,26 +18,32 @@ The MockTurtleBotC1 code supports ros-distro  = **humble** currently.
     
 A reminder that , as described in this repository's README.me, configure the **.gitignore** file if using Git and VSCode applications to develop code.  
     
-#### 1.2 Install LIDAR ROS2 drivers:
+#### 1.2 Sensors: RPLIdar, Camera RGB image, Stereo depth drivers, and IMU :
 
-RPLIDAR:
+*RPLIDAR*:
 
     sudo apt install -y ros-$ROS_DISTRO-rplidar-ros
     Note that this install configures USB udev rules  into /usr/udev/rules.d directory  
    
-#### 1.3 Install Sensors, Camera RGB image, Stereo depth drivers, and IMU :
+Power and Data data connection is to a USB-3 on the Raspberry Pi.
 
-An **Luxonis OAK-D-Lite Camera** includes a RBG Color Camera,  stereo pair Camra to generate a Depth Image, and IMU (generating Acceleration motion and GyroScope position data). The drivers are installed from a Binary package on the ROS Repository with the following script run from a Terminal : (where $ROS_DISTRO is humble, previously installed on the Robot. 
+*Camera and IMU*
+
+An **Luxonis OAK-D-Lite Camera** includes a RBG Color Camera to Publish a Color Image,  Stereo pair Camera to Publish a Depth Image, and IMU Publishing Acceleration motion and GyroScope position data in a coordinate protocol. The drivers are installed from a Binary package on the ROS Repository with the following script run from a Terminal : (where $ROS_DISTRO is humble, previously installed on the Robot. 
 
     sudo apt install ros-$ROS_DISTRO-depthai-ros
     
-#### 1.4 Install Create Base Library and driver:
-This Turtlebot Create Robot uses an iRobot Roomba 500 or Create 1 Base has battery, Differerential Driv e(2WD) motors controlled from a serial protocol and  generates Odometry data. The drivers are installed from a Binary package on the ROS Repository with the following script run from a Terminal : 
+Of many ARGUMENTS used in the Oak-D-Lite driver,  several values in the Launch scripts are set that are suitable for this robot model: camera_model = OAK-D-LITE, mode = depth, imu_Mode = 1 (LINEAR_INTERPOLATE_GYRO to prioritize gyroscope & interpolates Accelerometer Data suitable for yaw rate use), stereo_fps = 10 (to reduce message load), previewWidth, previewHeight = 412, enableRviz = False (no Rviz display on the Robot).
+
+The camera is powered from a USB-C connector preferably configured with a Power Splitter to power the camera directly from the battery source and data connection to USB-3 on the Raspberry Pi.
+   
+#### 1.3 Install Create Base Library and driver:
+This Turtlebot Create Robot uses an iRobot Roomba 500 or Create 1 Base having a battery, Differerential Drive (2WD) motors controlled from a serial protocol with Subscription to /cmd_vel and  Publishes Odometry data. The drivers are installed from a Binary package on the ROS Repository with the following script run from a Terminal : 
    
        sudo apt install ros-$ROS_DISTRO-create_robot
        source opt/ros/humble/setup.bash
    
-#### 1.5 Configure Serial USB Permissions and Install USB Serial Port udev Rules
+#### 1.4 Configure Serial USB Permissions and Install USB Serial Port udev Rules
 
 USB Permissions
 In order to connect to Create over USB, ensure your user is in the dialout group
@@ -73,7 +79,7 @@ crw-rw-rw-  1 root   dialout 188,   0 Mar  5 14:02 ttyUSB0
 crw-rw-rw-  1 root   dialout 188,   1 Mar  5 14:02 ttyUSB1  
 
 
-#### 1.6 Configure ENV Variables
+#### 1.5 Configure ENV Variables
 ### 1. Robot Type
 Set MTBC1_BASE env variable to the type of robot base that you want to use. This is not required if you're using a custom URDF. The MockTurtleBotC1 is a *2wd*. For example:
 
@@ -84,7 +90,7 @@ Tested Image and IMU sensor is:
 
     echo "export MTBC1_DEPTH_SENSOR=oakdlite" >> ~/.bashrc
 
-#### 2.2 Laser Sensor
+#### 2 Laser Sensor
 The launch files of the tested laser sensors have already been added in bringup.launch.py. You can enable one of these sensors by exporting the laser sensor you're using to `MTBC1_LASER_SENSOR` env variable.
 
 Tested Laser Sensors:
@@ -101,11 +107,11 @@ Source your `~/.bashrc` to apply the changes you made:
 
 ## Miscellaneous
 
-### 2. Running a launch file during boot-up.
+### 4. Running a launch file during boot-up.
 
 This is a short tutorial on how to make your bringup launch files run during startup.
 
-### 2.1 Create your env.sh
+### 4.1 Create your env.sh
 
     sudo touch /etc/ros/env.sh
     sudo nano /etc/ros/env.sh 
@@ -117,7 +123,7 @@ and paste the following:
     export MTBC1=<your_robot_type>
     export MTBC1_LASER_SENSOR=<your_supported_sensor> #(optional)
 
-### 2.2 Create systemd service
+### 4.2 Create systemd service
 
     sudo touch /etc/systemd/system/robot-boot.service
     sudo nano  /etc/systemd/system/robot-boot.service
@@ -140,7 +146,7 @@ Remember to replace:
 - `your_ros_distro` with the ros2 distro (`echo $ROS_DISTRO`) your machine is running on
 - `your_ws` with the location of the ros2 ws where you installed linorobot2
 
-### 2.3 Enable the service
+### 4.3 Enable the service
 
     sudo systemctl enable robot-boot.service
 
@@ -151,7 +157,7 @@ You can check if the service you just created is correct by:
 
 * You should see the ros2 logs that you usually see when running bringup.launch.py. Once successful, you can now reboot your machine. bringup.launch.py should start running once the machine finished booting up.
 
-### 2.4 Removing the service
+### 4.4 Removing the service
 
     systemctl stop robot-boot.service
     systemctl disable robot-boot.service
