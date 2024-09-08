@@ -1,0 +1,87 @@
+/stereo_inertial_node:
+  ros__parameters:
+    LRchecktresh: 5
+    angularVelCovariance: 0.0
+    color:
+      image:
+        enable_pub_plugins:
+        - image_transport/compressedDepth
+        - image_transport/compressed
+        - image_transport/raw
+        - image_transport/theora
+        format: jpeg
+        jpeg_quality: 95
+        png_level: 3
+        tiff:
+          res_unit: inch
+          xdpi: -1
+          ydpi: -1
+      preview:
+        image:
+          enable_pub_plugins:
+          - image_transport/compressedDepth
+          - image_transport/compressed
+          - image_transport/raw
+          - image_transport/theora
+          format: jpeg
+          jpeg_quality: 95
+          png_level: 3
+          tiff:
+            res_unit: inch
+            xdpi: -1
+            ydpi: -1
+    confidence: 200
+    depth_aligned: true
+    detectionClassesCount: 80
+    dotProjectormA: 200.0
+    enableDotProjector: false
+    enableFloodLight: false
+    enableRosBaseTimeUpdate: false
+    enableSpatialDetection: true
+    expTime: 20000
+    extended: false
+    floodLightmA: 200.0
+    imuMode: 1
+    linearAccelCovariance: 0.0
+    lrcheck: true
+    manualExposure: false
+    mode: depth
+    monoResolution: 720p
+    mxId: x
+    nnName: x
+    poeMode: false
+    previewHeight: 416
+    previewWidth: 416
+    qos_overrides:
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    rectify: true
+    resourceBaseFolder: /opt/ros/humble/share/depthai_examples/resources
+    rgbResolution: 1080p
+    rgbScaleDinominator: 3
+    rgbScaleNumerator: 2
+    sensIso: 800
+    stereo:
+      depth:
+        enable_pub_plugins:
+        - image_transport/compressedDepth
+        - image_transport/compressed
+        - image_transport/raw
+        - image_transport/theora
+        format: jpeg
+        jpeg_quality: 95
+        png_level: 3
+        tiff:
+          res_unit: inch
+          xdpi: -1
+          ydpi: -1
+    stereo_fps: 10
+    subpixel: true
+    syncNN: true
+    tf_prefix: oak
+    usb2Mode: false
+    use_sim_time: false
