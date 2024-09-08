@@ -1,3 +1,5 @@
+# Revised by AR Lunan 2024 for MockTurtleBotC1
+#
 # Copyright (c) 2021 Juan Miguel Jimeno
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,11 +25,11 @@ from launch_ros.actions import Node, SetRemap
 
 
 def generate_launch_description():
-    laser_sensor_name = os.getenv('LINOROBOT2_LASER_SENSOR', '')
-    depth_sensor_name = os.getenv('LINOROBOT2_DEPTH_SENSOR', '')
+    laser_sensor_name = os.getenv('MTBC1_SENSOR', '')
+    depth_sensor_name = os.getenv('MTBC1_DEPTH_SENSOR', '')
     
     fake_laser_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'config', 'fake_laser.yaml']
+        [FindPackageShare('mtbc1_bringup'), 'config', 'fake_laser.yaml']
     )
 
     #indices
@@ -35,36 +37,22 @@ def generate_launch_description():
     #1 - depth info topic (str)
     depth_topics = {
         '': ['', '', '', {}, '', ''],
-        'realsense': ['/camera/depth/image_rect_raw', '/camera/depth/camera_info'],
-        'astra': ['/depth/rgb/ir', '/camera_info'],
-        'zed': ['/zed/depth/depth_registered', '/zed/depth/camera_info'],
-        'zed2': ['/zed/depth/depth_registered', '/zed/depth/camera_info'],
-        'zed2i': ['/zed/depth/depth_registered', '/zed/depth/camera_info'],
-        'zedm': ['/zed/depth/depth_registered', '/zed/depth/camera_info'],
-        'oakd': ['/right/image_rect', '/right/camera_info'],
-        'oakdlite': ['/right/image_rect', '/right/camera_info'],
-        'oakdpro': ['/right/image_rect', '/right/camera_info'],
+        'oakdlite': ['/stereo/depth', '/stereo/depth/camera_info'],
+        'oakdpro': ['/stereo/depth', '/stereo/depth/camera_info'],
     }
 
     point_cloud_topics = {
         '': '',
-        'realsense': '/camera/depth/color/points',
-        'astra': '/camera/depth/points',
-        'zed': '/zed/point_cloud/cloud_registered',
-        'zed2': '/zed/point_cloud/cloud_registered',
-        'zed2i': '/zed/point_cloud/cloud_registered',
-        'zedm': '/zed/point_cloud/cloud_registered',
-        'oakd': '/stereo/points',
         'oakdlite': '/stereo/points',
-        'oakdpro': '/stereo/points',
+        'oakdpro': '/stereo/points'
     }
 
     laser_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'lasers.launch.py']
+        [FindPackageShare('mtbc1_bringup'), 'launch', 'lasers.launch.py']
     )
 
     depth_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'depth.launch.py']
+        [FindPackageShare('mtbc1_bringup'), 'launch', 'depth.launch.py']
     )
 
     return LaunchDescription([
