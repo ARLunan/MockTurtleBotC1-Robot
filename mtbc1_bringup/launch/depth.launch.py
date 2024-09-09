@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.substitutions import PathJoinSubstitution, PythonExpression, LaunchConfiguration
@@ -32,12 +33,20 @@ def generate_launch_description():
         "oakdlite": "OAK-D-LITE",
         "oakdpro": "OAK-D-PRO"
     }
+    
+    config = os.path.join(
+        get_package_share_directory('mtbc1_bringup'), 'config', 'oakd_inertial.yaml'
+    )
+        
     return LaunchDescription([
             
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(PathJoinSubstitution(
                 [FindPackageShare('depthai_examples'), 'launch', 'stereo_inertial.launch.py']
             )),
+
+            launch_parameters=[config],
+
             condition=IfCondition(PythonExpression(['"', LaunchConfiguration('sensor'), '" in "', str(oakd_sensors), '"'])),
             launch_arguments={
                 'camera_model': to_oakd_vars.get(LaunchConfiguration('sensor'), None),              
