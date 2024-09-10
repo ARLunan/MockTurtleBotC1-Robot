@@ -48,6 +48,12 @@ def generate_launch_description():
             arguments=[LaunchConfiguration("desc")]
         ),
 
-
+         IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(description_launch_path)
+        ),
+        
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(sensors_launch_path),
+        )
 
 ])

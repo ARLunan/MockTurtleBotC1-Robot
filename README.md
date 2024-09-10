@@ -1,5 +1,7 @@
 # MockTurtleBot
-MockTurtleBot Project - iRobot© Create1/Roomba 500 Base
+###MockTurtleBot Project - iRobot© Create1/Roomba 500 Base
+
+### At this time, this repository is "Work in Progress" so expect errors to be displayed after launching many of the scripts and packages.
 
 The requirement of the work in this repository is to document the development and post the release of  ROS 2 Packages that migrate the original "Willow Garage" / Open Robotics Turtlebot (tm) where the last released repository was ROS Indigo, to ROS 2 Humble/Navigation 2 autonomous navigation'. This new repository called "MockTurtleBot" uses this orgiginal iRobot Create (™) 1 Base. It should be mentioned that while this repository is written to use with a iRobot Create 1, the installed base drive package (Autonomy Labs ™) includes support for the Roomba Model 500 or 600) and Create 2 base. To enable these drivers, a manual revison must be made to the mtbc1_bringup launch file that is installed in the mtbc1_ws workspace, and recompiled.  
 
