@@ -51,7 +51,7 @@ def generate_launch_description():
             executable='create_1.launch.py',
             name='create_bringup',
             output='screen',
-            arguments=[LaunchConfiguration("desc")]
+            arguments=[LaunchConfiguration("desc"), LaunchConfiguration("dev")]
         ),
 
          IncludeLaunchDescription(
