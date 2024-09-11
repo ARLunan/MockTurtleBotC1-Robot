@@ -25,7 +25,7 @@ from launch.conditions import IfCondition, UnlessCondition
 def generate_launch_description():
 
     sensors_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'sensors.launch.py']
+        [FindPackageShare('mtbc1_bringup'), 'launch', 'sensors.launch.py']
     )
     
     joy_launch_path = PathJoinSubstitution(
@@ -33,11 +33,11 @@ def generate_launch_description():
     )
     
     description_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
+        [FindPackageShare('mtbc1_description'), 'launch', 'description.launch.py']
     )
     
     ekf_config_path = PathJoinSubstitution(
-        [FindPackageShare("mtbc1"), "config", "ekf.yaml"]
+        [FindPackageShare("mtbc1_base"), "config", "ekf.yaml"]
     )
 
     default_robot_launch_path = PathJoinSubstitution(
