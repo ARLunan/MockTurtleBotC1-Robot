@@ -25,7 +25,7 @@ from launch_ros.actions import Node, SetRemap
 
 
 def generate_launch_description():
-    laser_sensor_name = os.getenv('MTBC1_SENSOR', '')
+    laser_sensor_name = os.getenv('MTBC1_LASER_SENSOR', '')
     depth_sensor_name = os.getenv('MTBC1_DEPTH_SENSOR', '')
     
     fake_laser_config_path = PathJoinSubstitution(
@@ -56,22 +56,13 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-      
-#     ToDo Execute python scripts
-#        IncludeLaunchDescription(
-#            PythonLaunchDescriptionSource(description_launch_path)
-#        ),
-#        IncludeLaunchDescription(
-#            PythonLaunchDescriptionSource(sensors_launch_path),
-#        )
-        
         GroupAction(
             actions=[
                 SetRemap(src=point_cloud_topics[depth_sensor_name], dst='/camera/depth/color/points'),
                 IncludeLaunchDescription(
-                    PythonLaunchDescriptionSource(depth_launch_path),
-                    condition=IfCondition(PythonExpression(['"" != "', depth_sensor_name, '"'])),
-                    launch_arguments={'sensor': depth_sensor_name}.items()   
+                     PythonLaunchDescriptionSource(depth_launch_path),
+                     condition=IfCondition(PythonExpression(['"" != "', depth_sensor_name, '"'])),
+                     launch_arguments={'sensor': depth_sensor_name}.items()   
                 )
             ]
         ),       

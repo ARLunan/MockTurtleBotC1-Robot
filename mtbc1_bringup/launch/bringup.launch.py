@@ -24,21 +24,78 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
+    sensors_launch_path = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_bringup'), 'launch', 'sensors.launch.py']
+    )
+    
     joy_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'), 'launch', 'joy_teleop.launch.py']
     )
     
+    description_launch_path = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
+    )
+    
+    ekf_config_path = PathJoinSubstitution(
+        [FindPackageShare("mtbc1"), "config", "ekf.yaml"]
+    )
+
     default_robot_launch_path = PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'), 'launch', 'default_robot.launch.py']
     )
-    
-    return LaunchDescription([
+        
+    return LaunchDescription([ 
+        DeclareLaunchArgument(
+        name='joy', 
+        default_value='false',
+        description='Use Joystick'
+    ),  
 
     DeclareLaunchArgument(
-      name='joy', 
-      default_value='false',
-      description='Use Joystick'
-    ),  
+        name='odom_topic', 
+        default_value='/odom',
+        description='EKF out odometry topic'
+    ),    
+    
+    DeclareLaunchArgument(
+        name='madgwick',
+        default_value='false',
+        description='Use madgwick to fuse imu and magnetometer'
+    ),
+
+    DeclareLaunchArgument(
+        name='orientation_stddev',
+        default_value='0.003162278',
+        description='Madgwick orientation stddev'
+    ),
+
+    DeclareLaunchArgument(
+        name='joy', 
+        default_value='false',
+        description='Use Joystick'
+    ),
+    
+    Node(
+        condition=IfCondition(LaunchConfiguration("madgwick")),
+        package='imu_filter_madgwick',
+        executable='imu_filter_madgwick_node',
+        name='madgwick_filter_node',
+        output='screen',
+        parameters=[
+            {'orientation_stddev' : LaunchConfiguration('orientation_stddev')}
+        ]
+    ),
+
+    Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        output='screen',
+        parameters=[
+            ekf_config_path
+        ],
+        remappings=[("odometry/filtered", LaunchConfiguration("odom_topic"))]
+    ),
 
     IncludeLaunchDescription(
         PythonLaunchDescriptionSource(joy_launch_path)                         
@@ -47,6 +104,5 @@ def generate_launch_description():
     IncludeLaunchDescription(
         PythonLaunchDescriptionSource(default_robot_launch_path)                         
     )
-
 
 ])

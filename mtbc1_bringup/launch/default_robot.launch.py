@@ -28,7 +28,7 @@ def generate_launch_description():
         [FindPackageShare('mtbc1_bringup'),'launch','sensors.launch.py']
     )
 
-    descrption_launch_path=PathJoinSubstitution(
+    description_launch_path=PathJoinSubstitution(
         [FindPackageShare('mtbc1_bringup'),'launch','description.launch.py']
     )
 
