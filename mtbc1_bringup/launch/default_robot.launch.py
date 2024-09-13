@@ -34,32 +34,19 @@ def generate_launch_description():
 
     return LaunchDescription([
 
-        DeclareLaunchArgument(
-            name='desc', 
-            default_value='false',
-            description='Mtbc1 Base Enable robot description'
-        ),
-
-        DeclareLaunchArgument(
-            name='dev', 
-            default_value='/dev/create1',
-            description='Mtbc1 Base udev rule Serial Port '
-        ),
-
-        Node(
+         Node(
             package='create_bringup',
             executable='create_1.launch.py',
             name='create_bringup',
             output='screen',
-            arguments=[LaunchConfiguration("desc"), LaunchConfiguration("dev")]
+            parameters=[{'desc': 'False', 'dev': '/dev/create1'}]
         ),
-
-         IncludeLaunchDescription(
+                
+        IncludeLaunchDescription(
             PythonLaunchDescriptionSource(description_launch_path)
         ),
         
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(sensors_launch_path),
         )
-
 ])
