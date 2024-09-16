@@ -25,7 +25,7 @@
     <child link="${base_frame}"/>
     <xacro:insert_block name="origin"/>
   </joint>
-
+<!--
   <link name="${base_frame}">
     <visual>
       <geometry>
@@ -44,8 +44,9 @@
 	             iyy="0.00001527320" iyz="0.0" izz="0.00001605536" />
     </inertial>
   </link>
-
+-->
   <!-- RGB Camera -->
+<!--
   <link name="${name}_rgb_camera_frame">
     <xacro:inertial_dummy/>
   </link>
@@ -65,8 +66,10 @@
       <parent link="${name}_rgb_camera_frame"/>
       <child link="${name}_rgb_camera_optical_frame"/>
   </joint>
-
+-->  
   <!-- Left Camera -->
+
+<!--  
   <link name="${name}_left_camera_frame">
     <xacro:inertial_dummy/>
   </link>
@@ -86,8 +89,9 @@
       <parent link="${name}_left_camera_frame"/>
       <child link="${name}_left_camera_optical_frame"/>
   </joint>
-
+-->
   <!-- Right Camera -->
+<!--
   <link name="${name}_right_camera_frame">
     <xacro:inertial_dummy/>
   </link>
@@ -106,7 +110,9 @@
       <origin xyz="0 0 0" rpy="-${M_PI/2} 0.0 -${M_PI/2}"/>
       <parent link="${name}_right_camera_frame"/>
       <child link="${name}_right_camera_optical_frame"/>
-  </joint>
+  </joint> 
+-->
+
 </xacro:macro>
 
 </robot>

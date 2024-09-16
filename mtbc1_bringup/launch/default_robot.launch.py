@@ -34,14 +34,14 @@ def generate_launch_description():
 
     return LaunchDescription([
 
-         Node(
-            package='create_bringup',
-            executable='create_1.launch.py',
-            name='create_bringup',
-            output='screen',
-            parameters=[{'desc': 'False', 'dev': '/dev/create1'}]
-        ),
-                
+#         Node(
+#            package='create_bringup',
+#            executable='create_1.launch.py',
+#            name='create_bringup',
+#            output='screen',
+#            parameters=[{'desc': 'False', 'dev': '/dev/create1'}]
+#        ),
+               
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(description_launch_path)
         ),
